@@ -1,0 +1,1 @@
+# algolia-js-document-indexer
