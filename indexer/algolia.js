@@ -45,13 +45,13 @@ export const algolia = function() {
                 'id', 'order', 'totalCount', 'topicsList', 'name', 'full_name', 'readme', 'private', 'description', 'url', 'ownerId', 'ownerLogin', 'ownerUrl', 'homePage', 'watchers', 'forks', 'language', 'license', 'topics', 'score', 'default_branch' 
             ],
             ranking: [
-                'desc(watchers)',
+                'exact',
                 'typo',
                 'words',
                 'filters',
                 'proximity',
                 'attribute',
-                'exact',
+                'desc(watchers)',
                 'custom'
             ],
             ignorePlurals: true,
