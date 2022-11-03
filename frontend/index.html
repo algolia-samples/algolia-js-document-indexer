@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/satellite-min.css">
+  <link rel="stylesheet" href="./src/index.css">
+  <link rel="stylesheet" href="./src/app.css">
+  <link rel="stylesheet" href="./src/algolia.css">
+  <link rel="stylesheet" href="./src/setup.css">
+  <link rel="stylesheet" href="./src/doc.css">
+
+  <title>Document Search Application</title>
+
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header-title">
+      <a href="/">Document Search Application</a>
+    </h1>
+    <a href="#" onclick="showSetup();" id="setup-link">Change Algolia properties</a>
+  </header>
+
+  <form id="setup-container">
+    <h2>Get started with the Demo Application</h2>
+    <p>Please provide the details of the Algolia index that you have created based on the blog post or <a href="#" onclick="setupDefaults();"><b>continue with defaults</b></a> to use the Index that was created by the authors as part of the post.</p>
+    <p>The Application ID & Search-Only API key are available on the <a href="https://www.algolia.com/account/api-keys/all" target="_blank">API keys page</a> of your application. Please also create an index and fill it with the sample data using the provided scraper script.</p>
+
+    <div class="placeholder">The Algolia Application ID:</div>
+    <input id="setup-app-id" type="text" tabIndex="0" oninput="canSetupContinue();">
+    <div class="placeholder">Search-Only API Key:</div>
+    <input id="setup-search-key" type="text" tabIndex="1" oninput="canSetupContinue();">
+    <div class="placeholder">The Index name:</div>
+    <input id="setup-index-name" type="text" tabIndex="2" oninput="canSetupContinue();">
+    <div id="setup-error-message"></div>
+    <div class="buttons">
+      <button id="setup-skip" onclick="setupDefaults();" class="ais-InfiniteHits-loadMore" type="button" tabindex="3">Skip, continue with defaults</button>
+      <button id="setup-continue" class="ais-InfiniteHits-loadMore" type="submit" tabindex="4" onclick="submitSetup()">Save & Continue</button>
+    </div>
+    
+  </form>
+  <!--Used to host the Algolia search UI-->
+  <div id="algolia-container">
+    <!-- The search box. Located on the top of the page, spanning the entire width -->
+    <div id="searchbox"></div>
+
+    <!-- The filters section, located on the left -->
+    <div class="filters">
+      <h3>Language</h3>
+      <div id="language"></div>
+      <h3>Topics</h3>
+      <div id="topics"></div>
+      <h3>Forks</h3>
+      <div id="forks"></div>
+    </div>
+
+    <!-- The results panel, located to the right side from the filters -->
+    <div class="results">
+      <h2>Results</h2>
+      <!--HitsPerPage-->
+      <div id="hitsPerPage"></div>
+      <!--Paginator-->
+      <div id="paginator"></div>
+      <!-- The location of the search result details -->
+      <div id="hits"></div>
+    </div>
+
+
+    <div id="readme-container" style="display: none;">
+      <div class="backdrop"  onclick="closeDocDialog()"></div>
+      <div class="dialog-container">
+        <div class="dialog-header">
+          <div class="title"></div>
+          <a onclick="closeDocDialog()" title="Close">X</a>
+        </div>
+        <div class="error" style="display: none;">Random error</div>
+        <div class="loader" style="display: none;"></div>
+        <div class="body" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <script
+  src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"
+  integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY="
+  crossorigin="anonymous"
+></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.41.2"></script>
+  <script src="./src/algolia.js"></script>
+  <script src="./src/app.js"></script>
+  <script src="./src/doc.js"></script>
+</body>
+
+</html>
