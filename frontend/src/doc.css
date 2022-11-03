@@ -1,0 +1,79 @@
+
+#readme-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+}
+#readme-container .backdrop {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    position: relative;
+    z-index: 1;
+    grid-row: 1;
+    grid-column: 1;
+}
+#readme-container .dialog-container {
+    grid-row: 1;
+    grid-column: 1;
+    align-self: center;
+    justify-self: center;
+    z-index: 2;
+    width: 80vw;
+    background: white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+#readme-container .dialog-container .dialog-header {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    border-bottom: solid 1px lightgray;
+    align-items: center;
+}
+#readme-container .dialog-container .dialog-header .title {
+    margin: 0px;
+    color: darkgray;
+}
+#readme-container .dialog-container .dialog-header a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 12px;
+    transform: scale(1.3, 1);
+    cursor: pointer;
+}
+#readme-container .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    align-self: center;
+    justify-self: center;
+    margin: 40px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+#readme-container .error {
+    padding: 10px;
+    font-weight: bold;
+    color: red;
+}
+#readme-container .body {
+    padding: 10px;
+    display: block;
+    overflow: auto;
+    max-height: 80vh;
+}
+#readme-container .body * {
+    max-width: 100%;
+}

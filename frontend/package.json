@@ -1,0 +1,20 @@
+{
+  "name": "listings-demo-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html --no-cache --port 3000",
+    "build": "parcel build index.html",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write ."
+  },
+  "devDependencies": {
+    "eslint": "8.15.0",
+    "parcel": "1.12.3",
+    "prettier": "2.6.2"
+  },
+  "dependencies": {
+    "algoliasearch": "4",
+    "instantsearch.js": "4.41.2"
+  }
+}

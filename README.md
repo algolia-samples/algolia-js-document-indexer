@@ -1,90 +1,35 @@
-# Sample application template
+# Algolia MongoDB Listings Application
 
-This is a template you can use to create other Algolia sample applications. It contains a variety of features that every Algolia sample app should ideally include. You can use the [Github repository template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) functionality to create your sample app from this template.
+This repository contains the local files for the sample Algolia Document indexer application that is explained as part of a blogpost series.
+It implements a document indexer & search application that can be used search in project documentation, essentially finding projects that were done in a specific technology, topic or containis specific domain knowledge that we might be looking for.
+This demo implementation scrapes the top GitHub repositories, stores their README.md in Algolia and makes them searchable.
 
 ## Features
 
-The sample app uses the following features:
+- A [NodeJS script](indexer/index.js) to scrape the top GitHub repositories and store their basic information and documentation in an Algolia index. The relevant Algolia code is contained in the [algolia.js](indexer/algolia.js).
+- A [Web application frontend](frontend/) to query the Algolia index directly and display search results
 
-- Three back-end implementations in different languages
-- ...
+## Algolia Index loading
 
-## Demo (Try it yourself!)
+To try the loading of the Algolia index based on the sample dataset, you need an Algolia API key, which you can obtain by:
+1. [Registering](https://www.algolia.com/users/sign_up) for a free Algolia account, or [Logging in](https://www.algolia.com/users/sign_in) to your existing account
+2. After signing in, an Algolia Application will automatically be created for you. You can either use the default (unnamed) application, or create a new application
+3. Go to your [API Keys](https://www.algolia.com/account/api-keys/all) section of your application and retrieve your **Application ID** and **Admin API Key**
+You will need to use both the **Application ID** and **Admin API Key** in when connecting your Algolia account from the Python code below
+4. Clone this repo
+5. Navigate into the indexer folder and run `npm install`
+6. Run the script by calling `node index.js -a [Algolia AppId] -k [Algolia ApiKey] -i [Algolia index name]`. The full list of command line options can be displayed either by calling the app with no arguments (`node index.js`) or calling it with the `-h` or `--help` switches.
 
-Adding a live demo (e.g., on [CodeSandbox](https://codesandbox.io/)) will let the people quickly test your sample application!
 
-## How to run the sample app locally
+The script will: 
+1. Connect to Algolia index using your credentials and validate the connection
+2. Start enumerating the top GitHub repositories using the GitHub API
+3. Prepare the Algolia index
+3. Load the dataset into Algolia from GitHub and replace the existing index
 
-The sample app implements three servers in the following programming languages:
+## Testing the demo application
 
-- [Python](server/python)
-- [Node.js/JavaScript](server/node)
-- [Go](server/go)
+You can also easily try out the Search Web Application by either:
+- opening the [StackBlitz]() hosted version of the application on the cloud. This contains both the source and the created application and allows you to make modifications and see the changes real-time.
+- opening the [local](frontend/) files for the web application. You will need to run **npm install** and **npm start** from the *frontend* directory to run the app.
 
-The [client](client) is a single HTML page.
-
-### 1. Clone this repository
-
-```
-git clone https://github.com/algolia-samples/chatbot-with-algolia-answers
-```
-
-Copy the file `.env.example` to the directory of the server you want to use and rename it to `.env`. For example, to use the Python implementation:
-
-```bash
-cp .env.example server/python/.env
-```
-
-### 2. Set up Algolia
-
-To use this sample app, you need an Algolia account. If you don't have one already, [create an account for free](https://www.algolia.com/users/sign-up). Note your [Application ID](https://deploy-preview-5789--algolia-docs.netlify.app/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/importing-with-the-api/#application-id).
-
-In the `.env` file, set the environment variables `ALGOLIA_APP_ID`:
-
-```bash
-ALGOLIA_APP_ID=<replace-with-your-algolia-app-id>
-```
-
-### 3. Create your Algolia index and upload data
-
-After you set up your Algolia account and Algolia application, [create and populate an index](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/).
-
-To upload your data, you can use the [Algolia dashboard](https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/how-to/importing-from-the-dashboard/) or use on of Algolia's [API clients](https://www.algolia.com/developers/#integrations).
-
-After creating the index and uploading the data, set the environment variables `ALGOLIA_INDEX_NAME` and `ALGOLIA_API_KEY` in the `.env` file:
-
-```bash
-ALGOLIA_INDEX_NAME=<replace-with-your-algolia-index-name>
-ALGOLIA_API_KEY=<replace-with-your-algolia-api-key>
-```
-
-### 6. Follow the instructions in the server directory
-
-Each server directory has a file with instructions:
-
-- [Node.js](server/node/README)
-- [Python](server/python/README)
-- [Go](server/go/README)
-
-For example, to run the Python implementation of the server, follow these steps:
-
-```bash
-cd server/python # there's a README in this folder with instructions
-python3 venv env
-source env/bin/activate
-pip3 install -r requirements.txt
-export FLASK_APP=server.py
-python3 -m flask run --port=4242
-```
-
-## Resources
-
-- [GitHub's repository template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) functionality
-
-## Contributing
-
-This template is open source and welcomes contributions. All contributions are subject to our [Code of Conduct](https://github.com/algolia-samples/.github/blob/master/CODE_OF_CONDUCT.md).
-
-## Authors
-
-- [@cdenoix](https://twitter.com/cdenoix)
